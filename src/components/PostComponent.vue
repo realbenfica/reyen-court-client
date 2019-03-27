@@ -15,7 +15,7 @@
         v-bind:index="index"
         v-bind:key="post._id"
       >
-        {{ `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getYear()}` }}
+        {{ `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFull Year()}` }}
         <p class="text"> {{post.text}}</p>
     </div>
     </div>
@@ -39,6 +39,12 @@ export default {
       this.posts = await PostService.getPosts();
     } catch(err) {
       this.error = err.message;
+    }
+  },
+  methods: {
+    async createPost() {
+      await PostService.insertPost(this.text)
+      this.posts = await PostService.getPosts();
     }
   }
 }
