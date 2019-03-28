@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <PostComponent />
+    <PermissionComponent />
   </div>
 </template>
 
 <script>
-import PostComponent from './components/PostComponent.vue'
+import PermissionComponent from './components/PermissionComponent.vue'
 
 export default {
   name: 'app',
   components: {
-    PostComponent
+    PermissionComponent
   }
 }
 </script>

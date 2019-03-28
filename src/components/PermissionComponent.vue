@@ -17,9 +17,9 @@
         v-bind:index="index"
         v-bind:key="permission._id"
       >
-        <p class="text"> {{permission.resource_name}}</p>
-        <p class="text"> {{permission.module_name}}</p>
-        <p class="text"> {{permission.permission_name}}</p>
+        <p class="text"> Resource: {{permission.resource_name}}</p>
+        <p class="text"> Module: {{permission.module_name}}</p>
+        <p class="text"> Permission: {{permission.permission_name}}</p>
     </div>
     </div>
   </div>
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     async createPermission() {
-      console.log("something")
+      console.log(this.data)
       await PermissionService.insertPermission(this.resource_name, this.module_name, this.permission_name)
       this.permissions = await PermissionService.getPermissions();
     }
