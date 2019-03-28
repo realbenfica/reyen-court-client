@@ -1,50 +1,56 @@
 <template>
   <div class="container">
-    <h1>Latest Posts</h1>
-    <div class="create-post">
-      <label for="create-post">Say Somethin...</label>
-      <input type="text" id="create-post" v-model="text" placeholder="Create a post">
-      <button v-on:click="createPost">Post!</button>
+    <h1>Reynen Court permissions/roles</h1>
+    <div class="create-permission">
+      <label for="create-permission">Set your permissions: </label>
+      <input type="resource_name" id="create-permission" v-model="resource_name" placeholder="Add resource">
+      <input type="module_name" id="create-permission" v-model="module_name" placeholder="Add module">
+      <input type="permission_name" id="create-permission" v-model="permission_name" placeholder="Add permission">
+      <button v-on:click="createPermission">submit</button>
     </div>
     <hr>
     <p class="error" v-if="error"> {{error}}</p>
-    <div class="posts-container">
-      <div class="post"
-        v-for="(post, index) in posts"
-        v-bind:item="post"
+    <div class="permissions-container">
+      <div class="permission"
+        v-for="(permission, index) in permissions"
+        v-bind:item="permission"
         v-bind:index="index"
-        v-bind:key="post._id"
+        v-bind:key="permission._id"
       >
-        {{ `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}` }}
-        <p class="text"> {{post.text}}</p>
+        <p class="text"> {{permission.resource_name}}</p>
+        <p class="text"> {{permission.module_name}}</p>
+        <p class="text"> {{permission.permission_name}}</p>
     </div>
     </div>
   </div>
 </template>
 
 <script>
-import PostService from '../PostService';
+import PermissionService from '../PermissionService';
 
 export default {
-  name: 'PostComponent',
+  name: 'PermissionComponent',
   data() {
     return {
-      posts: [],
+      permissions: [],
       error: '',
-      text: ''
+      resource_name: '',
+      module_name: '',
+      permission_name: ''
     }
   },
   async created() {
     try {
-      this.posts = await PostService.getPosts();
+      this.permissions = await PermissionService.getPermissions();
     } catch(err) {
       this.error = err.message;
     }
   },
   methods: {
-    async createPost() {
-      await PostService.insertPost(this.text)
-      this.posts = await PostService.getPosts();
+    async createPermission() {
+      console.log("something")
+      await PermissionService.insertPermission(this.resource_name, this.module_name, this.permission_name)
+      this.permissions = await PermissionService.getPermissions();
     }
   }
 }
@@ -64,7 +70,7 @@ p.error {
 
 }
 
-div.post {
+div.permission {
   position: relative;
   border: 1px solid #5bd658;
   background-color: #bcffb8;
