@@ -22,7 +22,7 @@ class PermissionService {
 
     //Create Permission
     static insertPermission(resource_name, module_name, permission_name) {
-        return axios.permission(url, {
+        return axios.post(url, {
             resource_name, 
             module_name, 
             permission_name
