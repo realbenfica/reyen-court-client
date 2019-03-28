@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     async createPermission() {
-      console.log(this.data)
       await PermissionService.insertPermission(this.resource_name, this.module_name, this.permission_name)
       this.permissions = await PermissionService.getPermissions();
     }
